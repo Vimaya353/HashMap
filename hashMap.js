@@ -23,5 +23,19 @@ export class HashMap {
         }
         return this.buckets[index];
     }
+
+    set(key,value) {
+        const bucket =  this.getBucket(this.hash(key));
+
+        for (const entry of bucket) {
+            if (entry [0] === key) {
+                entry[1] = value;
+                return;
+            }
+        }
+
+        bucket.push([key,value]);
+        this.size++;
+    }
 }
 
