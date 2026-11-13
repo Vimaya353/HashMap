@@ -37,5 +37,18 @@ export class HashMap {
         bucket.push([key,value]);
         this.size++;
     }
+
+    get(key) {
+        const bucket = this.getBucket(this.hash(key));
+        for (const entry of bucket) {
+            if (entry[0] === key) return entry[1];
+        }
+        return undefined;
+    }
+
+    has(key)  {
+        const bucket = this.getBucket(this.hash(key));
+        return bucket.some((entry) => entry[0] === key);
+    }
 }
 
