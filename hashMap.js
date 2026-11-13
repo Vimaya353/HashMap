@@ -50,5 +50,27 @@ export class HashMap {
         const bucket = this.getBucket(this.hash(key));
         return bucket.some((entry) => entry[0] === key);
     }
+
+    remove(key){
+        const bucket = this.getBucket(this.hash(key));
+
+        for(let i = 0; i < bucket.length; i++) {
+            if (bucket[i][0] === key ){
+                bucket.splice(i,1);
+                this.size--;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    length() {
+        return this.size;
+    }
+
+    clear(){
+        this.buckets = Array.from({length:this.capacity}, () => []);
+        this.size = 0;
+    }
 }
 
