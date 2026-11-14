@@ -98,9 +98,14 @@ export class HashMap {
         this.buckets = Array.from({length:this.capacity}, () => []);
         this.size = 0;
 
+        if (this.size > this.capacity * this.loadFactor) {
+            this.grow();
+        }
+
         for(const[key,value] of oldEntries) {
             this.set(key,value);
         }
     }
+
 }
 
