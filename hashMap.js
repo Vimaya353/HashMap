@@ -90,5 +90,17 @@ export class HashMap {
     values() {
         return this.entries().map(([,value]) => value);
     }
+
+    grow() {
+        const oldEntries = this.entries();
+
+        this.capacity *= 2;
+        this.buckets = Array.from({length:this.capacity}, () => []);
+        this.size = 0;
+
+        for(const[key,value] of oldEntries) {
+            this.set(key,value);
+        }
+    }
 }
 
