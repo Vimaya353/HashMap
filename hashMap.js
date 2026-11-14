@@ -72,5 +72,23 @@ export class HashMap {
         this.buckets = Array.from({length:this.capacity}, () => []);
         this.size = 0;
     }
+
+    entries() {
+        const result = [];
+        for (const bucket of this.buckets) {
+            for (const entry of bucket) {
+                result.push([entry[0],entry[1]]);
+            }
+        }
+        return result;
+    }
+
+    keys() {
+        return this.entries().map(([key]) => key);
+    }
+
+    values() {
+        return this.entries().map(([,value]) => value);
+    }
 }
 
